@@ -3,9 +3,33 @@
          with font-awesome or any other icon font library -->
     <li class="nav-item">
         <a href="{{ url('reglas') }}" class="nav-link">
-            <i class="nav-icon fa fa-file"></i>
+            <i class="nav-icon fa fa-exchange"></i>
             <p>
                 Listado de ordenes
+            </p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ url('#') }}" class="nav-link">
+            <i class="nav-icon fa fa-line-chart"></i>
+            <p>
+                Módulo de tasas
+            </p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ url('#') }}" class="nav-link">
+            <i class="nav-icon fa fa-users"></i>
+            <p>
+                Módulo de usuarios
+            </p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ url('#') }}" class="nav-link">
+            <i class="nav-icon fa fa-bank"></i>
+            <p>
+                Módulo de bancos
             </p>
         </a>
     </li>
