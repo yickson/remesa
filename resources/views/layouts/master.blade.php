@@ -71,7 +71,7 @@
 
 <!-- Main Footer -->
     <footer class="main-footer">
-        <strong>Copyright &copy; 2014-2019 <a href="https://redcapital.cl">Tranfex</a>.</strong> All rights reserved.
+        <strong>Copyright &copy; 2014-2019 <a href="https://tranfex.cl">Tranfex</a>.</strong> All rights reserved.
     </footer>
 </div>
 </body>
