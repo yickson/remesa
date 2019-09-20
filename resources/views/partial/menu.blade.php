@@ -19,7 +19,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ url('#') }}" class="nav-link">
+            <a href="{{ route('admin.usuarios') }}" class="nav-link">
                 <i class="nav-icon fa fa-users"></i>
                 <p>
                     Módulo de usuarios

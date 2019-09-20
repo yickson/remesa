@@ -21,3 +21,9 @@ Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+Route::group(['namespace' => 'Admin', 'middleware' => 'web', 'prefix' => 'admin', 'as' => 'admin.'], function(){
+   Route::group([], function(){
+      Route::get('users', 'UserController@index')->name('usuarios');
+      Route::get('list_users', 'UserController@list_users')->name('listar_usuarios');
+   });
+});
