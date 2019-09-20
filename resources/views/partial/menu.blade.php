@@ -27,7 +27,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ url('#') }}" class="nav-link">
+            <a href="{{ route('admin.bancos') }}" class="nav-link">
                 <i class="nav-icon fa fa-bank"></i>
                 <p>
                     Módulo de bancos

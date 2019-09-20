@@ -7,19 +7,19 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-12">
-                            <h3 class="card-title">Listado de usuarios</h3>
+                            <h3 class="card-title">Listado de bancos</h3>
                         </div>
                     </div>
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="usuarios" class="table table-hover table-bordered">
+                        <table id="bancos" class="table table-hover table-bordered">
                             <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>Nombre</th>
-                                <th>Correo</th>
+                                <th>Prefijo</th>
                             </tr>
                             </thead>
                         </table>
@@ -32,11 +32,11 @@
 
     <script>
         $(document).ready(function(){
-            listar_usuarios();
+            listar_bancos();
 
-            function listar_usuarios()
+            function listar_bancos()
             {
-                fetch('list_users').then(resp => resp.json())
+                fetch('list_banks').then(resp => resp.json())
                     .then(data => {
                         generar_tabla(data)
                     })
@@ -47,13 +47,13 @@
 
             function generar_tabla(dataSet)
             {
-                $('#usuarios').DataTable({
+                $('#bancos').DataTable({
                     destroy: true,
                     data: dataSet,
                     columns: [
                         { "data": "id"},
                         { "data": "name"},
-                        { "data": "email"},
+                        { "data": "prefix"},
                     ],
                     "ordering": true,
                     "bInfo": false,
