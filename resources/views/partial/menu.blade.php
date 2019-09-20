@@ -1,38 +1,40 @@
 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
     <!-- Add icons to the links using the .nav-icon class
          with font-awesome or any other icon font library -->
-    <li class="nav-item">
-        <a href="{{ url('reglas') }}" class="nav-link">
-            <i class="nav-icon fa fa-exchange"></i>
-            <p>
-                Listado de ordenes
-            </p>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="{{ url('#') }}" class="nav-link">
-            <i class="nav-icon fa fa-line-chart"></i>
-            <p>
-                Módulo de tasas
-            </p>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="{{ url('#') }}" class="nav-link">
-            <i class="nav-icon fa fa-users"></i>
-            <p>
-                Módulo de usuarios
-            </p>
-        </a>
-    </li>
-    <li class="nav-item">
-        <a href="{{ url('#') }}" class="nav-link">
-            <i class="nav-icon fa fa-bank"></i>
-            <p>
-                Módulo de bancos
-            </p>
-        </a>
-    </li>
+    @if(auth()->user()->type == 'admin')
+        <li class="nav-item">
+            <a href="{{ url('reglas') }}" class="nav-link">
+                <i class="nav-icon fa fa-exchange"></i>
+                <p>
+                    Listado de ordenes
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ url('#') }}" class="nav-link">
+                <i class="nav-icon fa fa-line-chart"></i>
+                <p>
+                    Módulo de tasas
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ url('#') }}" class="nav-link">
+                <i class="nav-icon fa fa-users"></i>
+                <p>
+                    Módulo de usuarios
+                </p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ url('#') }}" class="nav-link">
+                <i class="nav-icon fa fa-bank"></i>
+                <p>
+                    Módulo de bancos
+                </p>
+            </a>
+        </li>
+    @endif
     <li class="nav-item">
         <a href="{{ url('logout') }}" class="nav-link">
             <i class="nav-icon fa fa-sign-out"></i>
