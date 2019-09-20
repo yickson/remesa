@@ -3,7 +3,7 @@
          with font-awesome or any other icon font library -->
     @if(auth()->user()->type == 'admin')
         <li class="nav-item">
-            <a href="{{ url('reglas') }}" class="nav-link">
+            <a href="{{ route('admin.ordenes') }}" class="nav-link">
                 <i class="nav-icon fa fa-exchange"></i>
                 <p>
                     Listado de ordenes
@@ -11,7 +11,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ url('#') }}" class="nav-link">
+            <a href="{{ route('admin.tasas') }}" class="nav-link">
                 <i class="nav-icon fa fa-line-chart"></i>
                 <p>
                     Módulo de tasas
