@@ -4,5 +4,13 @@
 // Variables
 @import 'variables';
 
-// Bootstrap
 @import '~bootstrap/scss/bootstrap';
+@import '~datatables.net-bs4/css/dataTables.bootstrap4.min.css';
+@import url('https://cdn.datatables.net/buttons/1.5.3/css/buttons.bootstrap4.min.css');
+//@import '~admin-lte/plugins/datatables/dataTables.bootstrap4.css';
+//Admin-LTE
+@import '~admin-lte/dist/css/adminlte.min.css';
+@import '~daterangepicker/daterangepicker.css';
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css');
+@import url('https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css');
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700');

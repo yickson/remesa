@@ -11,6 +11,7 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
+    require('admin-lte');
 } catch (e) {}
 
 /**
@@ -36,6 +37,17 @@ if (token) {
 } else {
     console.error('CSRF token not found: https://laravel.com/docs/csrf#csrf-x-csrf-token');
 }
+
+require('daterangepicker');
+window.moment = require('moment');
+window.swal = require('sweetalert2');
+require('datatables.net-bs4');
+require('datatables.net-buttons-bs4')($);
+window.JSZip = require( "jszip" );
+require('datatables.net-buttons')(window, $);
+require('datatables.net-buttons/js/buttons.colVis')(window, $);
+require('datatables.net-buttons/js/buttons.html5')(window, $);
+require('datatables.net-buttons/js/buttons.print')(window, $);
 
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
