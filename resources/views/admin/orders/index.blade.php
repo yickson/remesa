@@ -14,18 +14,18 @@
                 <!-- /.card-header -->
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="bancos" class="table table-hover table-bordered">
+                        <table id="ordenes" class="table table-hover table-bordered">
                             <thead>
                             <tr>
-                                <th>ID</th>
                                 <th>Localizador</th>
                                 <th>Monto</th>
-                                <th>Banco</th>
+{{--                                <th>Banco</th>--}}
                                 <th>Nombre</th>
                                 <th>Cédula</th>
                                 <th>Cuenta</th>
+                                <th>Solicitante</th>
                                 <th>Estatus</th>
-                                <th>Acciones</th>
+{{--                                <th>Acciones</th>--}}
                             </tr>
                             </thead>
                         </table>
@@ -38,11 +38,11 @@
 
     <script>
         $(document).ready(function(){
-            listar_bancos();
+            listar_ordenes();
 
-            function listar_bancos()
+            function listar_ordenes()
             {
-                fetch('list_banks').then(resp => resp.json())
+                fetch('list_orders').then(resp => resp.json())
                     .then(data => {
                         generar_tabla(data)
                     })
@@ -53,13 +53,17 @@
 
             function generar_tabla(dataSet)
             {
-                $('#bancos').DataTable({
+                $('#ordenes').DataTable({
                     destroy: true,
                     data: dataSet,
                     columns: [
-                        { "data": "id"},
-                        { "data": "name"},
-                        { "data": "prefix"},
+                        { "data": "locator"},
+                        { "data": "amount"},
+                        { "data": "account_name"},
+                        { "data": "account_dni"},
+                        { "data": "account_number"},
+                        { "data": "user"},
+                        { "data": "status"}
                     ],
                     "ordering": true,
                     "bInfo": false,
