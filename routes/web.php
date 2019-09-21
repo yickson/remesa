@@ -39,7 +39,11 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'web', 'prefix' => 'admin'
    Route::get('demand', 'DemandController@create')->name('solicitud');
 
    Route::get('accounts', 'AccountController@index')->name('cuentas');
+   Route::get('account/create', 'AccountController@create')->name('cuenta.crear');
+   Route::post('account/store', 'AccountController@store')->name('cuenta.almacenar');
 
    Route::get('demands', 'DemandController@index')->name('solicitudes');
    Route::get('list_demands', 'DemandController@list_demands');
+
+   Route::post('bank/search', 'BankController@view');
 });

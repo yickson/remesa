@@ -19,4 +19,10 @@ class BankController extends Controller
         $bancos = Bank::all();
         return response()->json($bancos);
     }
+
+    public function view(Request $request)
+    {
+        $bank = Bank::find($request->id);
+        return response()->json($bank);
+    }
 }
