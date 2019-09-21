@@ -25,6 +25,7 @@
                                 <th>Cuenta</th>
                                 <th>Solicitante</th>
                                 <th>Estatus</th>
+                                <th>Fecha de creación</th>
 {{--                                <th>Acciones</th>--}}
                             </tr>
                             </thead>
@@ -63,7 +64,8 @@
                         { "data": "account_dni"},
                         { "data": "account_number"},
                         { "data": "user"},
-                        { "data": "status"}
+                        { "data": "status"},
+                        { "data": "date"}
                     ],
                     "ordering": true,
                     "bInfo": false,

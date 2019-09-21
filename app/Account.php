@@ -10,11 +10,17 @@ class Account extends Model
         'number',
         'identification',
         'name',
-        'user_id'
+        'user_id',
+        'bank_id'
     ];
 
     public function user()
     {
         return $this->belongsTo('App\User');
+    }
+
+    public function bank()
+    {
+        return $this->belongsTo('App\Bank');
     }
 }

@@ -6,28 +6,32 @@ use App\Order;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class OrderController extends Controller
+class DemandController extends Controller
 {
     public function index()
     {
-        return view('admin.orders.index');
+        return view('admin.demands.index');
     }
 
-    public function list_orders()
+    public function list_demands()
     {
-        $orders = Order::with('account', 'user')->get();
+        $orders = Order::with(['account' => function($q){ $q->with('bank'); }])->where('user_id', auth()->id())->get();
         $data = [];
-        foreach ($orders as $i => $order)
-        {
+        foreach ($orders as $i => $order) {
             $data[$i]['locator'] = $order->locator;
             $data[$i]['amount'] = $order->amount;
-            $data[$i]['status'] = $order->status;
+            $data[$i]['bank'] = $order->account->bank->name;
             $data[$i]['account_name'] = $order->account->name;
             $data[$i]['account_dni'] = $order->account->identification;
             $data[$i]['account_number'] = $order->account->number;
-            $data[$i]['user'] = $order->user->name;
+            $data[$i]['status'] = $order->status;
             $data[$i]['date'] = $order->created_at->format('d-m-Y');
         }
         return response()->json($data);
+    }
+
+    public function create()
+    {
+
     }
 }

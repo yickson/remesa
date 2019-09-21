@@ -35,4 +35,11 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'web', 'prefix' => 'admin'
       Route::get('users', 'UserController@index')->name('usuarios');
       Route::get('list_users', 'UserController@list_users')->name('listar_usuarios');
    });
+
+   Route::get('demand', 'DemandController@create')->name('solicitud');
+
+   Route::get('accounts', 'AccountController@index')->name('cuentas');
+
+   Route::get('demands', 'DemandController@index')->name('solicitudes');
+   Route::get('list_demands', 'DemandController@list_demands');
 });

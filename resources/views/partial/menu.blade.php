@@ -36,6 +36,30 @@
         </li>
     @endif
     <li class="nav-item">
+        <a href="{{ route('admin.solicitud') }}" class="nav-link">
+            <i class="nav-icon fa fa-money"></i>
+            <p>
+                Solicitar remesa
+            </p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('admin.cuentas') }}" class="nav-link">
+            <i class="nav-icon fa fa-bank"></i>
+            <p>
+                Mis cuentas bancarias
+            </p>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a href="{{ route('admin.solicitudes') }}" class="nav-link">
+            <i class="nav-icon fa fa-paper-plane"></i>
+            <p>
+                Mis solicitudes
+            </p>
+        </a>
+    </li>
+    <li class="nav-item">
         <a href="{{ url('logout') }}" class="nav-link">
             <i class="nav-icon fa fa-sign-out"></i>
             <p>

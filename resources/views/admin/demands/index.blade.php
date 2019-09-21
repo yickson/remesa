@@ -7,7 +7,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-12">
-                            <h3 class="card-title">Listado de Tasas</h3>
+                            <h3 class="card-title">Listado de mis solicitudes</h3>
                         </div>
                     </div>
                 </div>
@@ -17,8 +17,14 @@
                         <table id="ordenes" class="table table-hover table-bordered">
                             <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Valor</th>
+                                <th>Localizador</th>
+                                <th>Monto</th>
+                                <th>Banco</th>
+                                <th>Nombre</th>
+                                <th>Cédula</th>
+                                <th>Cuenta</th>
+                                <th>Fecha</th>
+                                <th>Estatus</th>
                                 {{--                                <th>Acciones</th>--}}
                             </tr>
                             </thead>
@@ -32,11 +38,11 @@
 
     <script>
         $(document).ready(function(){
-            listar_tasas();
+            listar_demandas();
 
-            function listar_tasas()
+            function listar_demandas()
             {
-                fetch('list_rates').then(resp => resp.json())
+                fetch('list_demands').then(resp => resp.json())
                     .then(data => {
                         generar_tabla(data)
                     })
@@ -51,8 +57,14 @@
                     destroy: true,
                     data: dataSet,
                     columns: [
-                        { "data": "id"},
-                        { "data": "value"},
+                        { "data": "locator"},
+                        { "data": "amount"},
+                        { "data": "bank"},
+                        { "data": "account_name"},
+                        { "data": "account_dni"},
+                        { "data": "account_number"},
+                        { "data": "date"},
+                        { "data": "status"}
                     ],
                     "ordering": true,
                     "bInfo": false,
