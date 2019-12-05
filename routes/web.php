@@ -47,3 +47,6 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'web', 'prefix' => 'admin'
 
    Route::post('bank/search', 'BankController@view');
 });
+
+//List of routes for Axios
+Route::get('rate', 'RateController@show');
