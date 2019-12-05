@@ -21,6 +21,9 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
+import RateComponent from "./components/RateComponent";
+Vue.component('rate-component', RateComponent);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
