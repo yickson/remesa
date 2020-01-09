@@ -22,7 +22,10 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 import RateComponent from "./components/RateComponent";
+import ContactComponent from "./components/ContactComponent";
 Vue.component('rate-component', RateComponent);
+Vue.component('contact-component', ContactComponent);
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
