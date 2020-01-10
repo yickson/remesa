@@ -1996,23 +1996,29 @@ __webpack_require__.r(__webpack_exports__);
   template: 'contact-component',
   data: function data() {
     return {
-      nombre: '',
-      apellido: '',
-      correo: '',
-      telefono: '',
-      mensaje: ''
+      name: '',
+      last_name: '',
+      email: '',
+      phone: '',
+      message: ''
     };
   },
   methods: {
-    sendContact: function sendContact() {
+    sendContact: function sendContact(e) {
+      e.preventDefault();
       var data = {
-        nombre: this.nombre,
-        apellido: this.apellido,
-        correo: this.correo,
-        telefono: this.telefono,
-        mensaje: this.mensaje
+        name: this.name,
+        last_name: this.last_name,
+        email: this.email,
+        phone: this.phone,
+        message: this.message
       };
       console.log('Enviar contacto ', data);
+      axios.post('contact', data).then(function (response) {
+        console.log(response.data);
+      })["catch"](function (e) {
+        return console.log(e);
+      });
     }
   }
 });
@@ -111953,7 +111959,7 @@ var render = function() {
     _c("div", { staticClass: "col-lg-12" }, [
       _vm._m(0),
       _vm._v(" "),
-      _c("form", { attrs: { method: "post" } }, [
+      _c("form", [
         _c("div", { staticClass: "row" }, [
           _c("div", { staticClass: "col-md-6 form-group" }, [
             _c("label", [_vm._v("Nombre")]),
@@ -111963,19 +111969,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.nombre,
-                  expression: "nombre"
+                  value: _vm.name,
+                  expression: "name"
                 }
               ],
               staticClass: "form-control form-control-lg",
               attrs: { type: "text" },
-              domProps: { value: _vm.nombre },
+              domProps: { value: _vm.name },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.nombre = $event.target.value
+                  _vm.name = $event.target.value
                 }
               }
             })
@@ -111989,19 +111995,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.apellido,
-                  expression: "apellido"
+                  value: _vm.last_name,
+                  expression: "last_name"
                 }
               ],
               staticClass: "form-control form-control-lg",
               attrs: { type: "text" },
-              domProps: { value: _vm.apellido },
+              domProps: { value: _vm.last_name },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.apellido = $event.target.value
+                  _vm.last_name = $event.target.value
                 }
               }
             })
@@ -112017,19 +112023,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.correo,
-                  expression: "correo"
+                  value: _vm.email,
+                  expression: "email"
                 }
               ],
               staticClass: "form-control form-control-lg",
               attrs: { type: "text" },
-              domProps: { value: _vm.correo },
+              domProps: { value: _vm.email },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.correo = $event.target.value
+                  _vm.email = $event.target.value
                 }
               }
             })
@@ -112043,19 +112049,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.telefono,
-                  expression: "telefono"
+                  value: _vm.phone,
+                  expression: "phone"
                 }
               ],
               staticClass: "form-control form-control-lg",
               attrs: { type: "text" },
-              domProps: { value: _vm.telefono },
+              domProps: { value: _vm.phone },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.telefono = $event.target.value
+                  _vm.phone = $event.target.value
                 }
               }
             })
@@ -112071,19 +112077,19 @@ var render = function() {
                 {
                   name: "model",
                   rawName: "v-model",
-                  value: _vm.mensaje,
-                  expression: "mensaje"
+                  value: _vm.message,
+                  expression: "message"
                 }
               ],
               staticClass: "form-control",
               attrs: { name: "", cols: "30", rows: "10" },
-              domProps: { value: _vm.mensaje },
+              domProps: { value: _vm.message },
               on: {
                 input: function($event) {
                   if ($event.target.composing) {
                     return
                   }
-                  _vm.mensaje = $event.target.value
+                  _vm.message = $event.target.value
                 }
               }
             })
