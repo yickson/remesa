@@ -4,31 +4,31 @@
             <div class="section-title mb-5">
                 <h2>Contacto</h2>
             </div>
-            <form method="post">
+            <form>
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <label>Nombre</label>
-                        <input type="text" v-model="nombre" class="form-control form-control-lg">
+                        <input type="text" v-model="name" class="form-control form-control-lg">
                     </div>
                     <div class="col-md-6 form-group">
                         <label>Apellido</label>
-                        <input type="text" v-model="apellido" class="form-control form-control-lg">
+                        <input type="text" v-model="last_name" class="form-control form-control-lg">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 form-group">
                         <label>Correo electrónico</label>
-                        <input type="text" v-model="correo" class="form-control form-control-lg">
+                        <input type="text" v-model="email" class="form-control form-control-lg">
                     </div>
                     <div class="col-md-6 form-group">
                         <label>Teléfono</label>
-                        <input type="text" v-model="telefono" class="form-control form-control-lg">
+                        <input type="text" v-model="phone" class="form-control form-control-lg">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 form-group">
                         <label>Mensaje</label>
-                        <textarea name="" v-model="mensaje" cols="30" rows="10" class="form-control"/>
+                        <textarea name="" v-model="message" cols="30" rows="10" class="form-control"/>
                     </div>
                 </div>
                 <div class="row">
@@ -46,23 +46,28 @@
         template: 'contact-component',
         data() {
             return {
-                nombre: '',
-                apellido: '',
-                correo: '',
-                telefono: '',
-                mensaje: ''
+                name: '',
+                last_name: '',
+                email: '',
+                phone: '',
+                message: ''
             }
         },
         methods: {
-            sendContact() {
+            sendContact(e) {
+                e.preventDefault();
                 let data = {
-                  nombre: this.nombre,
-                  apellido: this.apellido,
-                  correo: this.correo,
-                  telefono: this.telefono,
-                  mensaje: this.mensaje
+                  name: this.name,
+                  last_name: this.last_name,
+                  email: this.email,
+                  phone: this.phone,
+                  message: this.message
                 };
                 console.log('Enviar contacto ', data);
+                axios.post('contact', data)
+                .then(response => {
+                    console.log(response.data);
+                }).catch(e => console.log(e));
             }
         }
     }
