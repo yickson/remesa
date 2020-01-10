@@ -66,10 +66,20 @@
                 axios.post('contact', data)
                 .then(response => {
                     if(response.data){
-                        this.$swal(
-                            'Contacto',
-                            'Se ha enviado correctamente',
-                            'success'
+                        this.$swal({
+                            title: 'Contacto',
+                            text: 'Ha sido enviado correctamente.',
+                            timer: 2000,
+                            showCancelButton: false,
+                            showConfirmButton: false
+                        }).then(
+                            function () {},
+                            // handling the promise rejection
+                            function (dismiss) {
+                                if (dismiss === 'timer') {
+                                    //console.log('I was closed by the timer')
+                                }
+                            }
                         );
                         this.name = '';
                         this.last_name = '';
