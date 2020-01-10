@@ -27,7 +27,7 @@ class ContactController extends Controller
         if($validate->fails()) {
             return response()->json($validate->errors(), 422);
         }
-        Mail::to($request->email)->later(180, new ContactMail($request->all()));
+        Mail::to($request->email)->later(60, new ContactMail($request->all()));
 
         return response()->json('Contacto enviado', 200);
     }

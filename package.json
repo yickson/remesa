@@ -32,6 +32,7 @@
         "jszip": "^3.2.2",
         "moment": "^2.24.0",
         "sweetalert2": "^8.19.0",
-        "tailwindcss": "^1.1.4"
+        "tailwindcss": "^1.1.4",
+        "vue-sweetalert2": "^3.0.1"
     }
 }

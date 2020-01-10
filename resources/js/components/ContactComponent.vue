@@ -65,7 +65,18 @@
                 };
                 axios.post('contact', data)
                 .then(response => {
-                    console.log(response.data);
+                    if(response.data){
+                        this.$swal(
+                            'Contacto',
+                            'Se ha enviado correctamente',
+                            'success'
+                        );
+                        this.name = '';
+                        this.last_name = '';
+                        this.email = '';
+                        this.phone = '';
+                        this.message = '';
+                    }
                 }).catch(e => console.log(e));
             }
         }
