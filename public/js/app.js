@@ -2013,7 +2013,6 @@ __webpack_require__.r(__webpack_exports__);
         phone: this.phone,
         message: this.message
       };
-      console.log('Enviar contacto ', data);
       axios.post('contact', data).then(function (response) {
         console.log(response.data);
       })["catch"](function (e) {

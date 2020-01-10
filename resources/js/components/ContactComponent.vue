@@ -63,7 +63,6 @@
                   phone: this.phone,
                   message: this.message
                 };
-                console.log('Enviar contacto ', data);
                 axios.post('contact', data)
                 .then(response => {
                     console.log(response.data);
