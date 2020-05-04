@@ -31,6 +31,7 @@ class ContactMail extends Mailable implements ShouldQueue
     public function build()
     {
         return $this->from('contacto@tranfex.cl')
+                    ->subject('Tranfex - Mensaje de Contacto')
                     ->view('emails.contacto');
     }
 }
