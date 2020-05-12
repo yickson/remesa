@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Tranfex - ADMIN</title>
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}" defer></script>
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
@@ -62,11 +62,12 @@
         <!-- Main content -->
         <div class="content pt-5">
             <div class="container-fluid">
-                @yield('content')
+                <div id="app">
+                    @yield('content')
+                </div>
             </div><!-- /.container-fluid -->
         </div>
     </div>
-    <div id="app"></div>
     @yield('scripts')
 
 <!-- Main Footer -->

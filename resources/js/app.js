@@ -24,8 +24,12 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 import VueSweetalert2 from 'vue-sweetalert2';
 import RateComponent from "./components/RateComponent";
 import ContactComponent from "./components/ContactComponent";
+//Import Admin
+import BankAccountComponent from "./components/admin/BankAccountComponent";
 Vue.component('rate-component', RateComponent);
 Vue.component('contact-component', ContactComponent);
+//Component Administrator
+Vue.component('bank-account-component', BankAccountComponent)
 
 
 Vue.use(VueSweetalert2);
