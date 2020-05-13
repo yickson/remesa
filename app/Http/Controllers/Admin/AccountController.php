@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Bank;
 use App\Account;
+use App\Transformers\AccountTransformer;
+use Spatie\Fractalistic\Fractal;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Validator;
 
@@ -21,10 +24,14 @@ class AccountController extends Controller
     {
         $userId = Auth::id();
         $accounts = Account::where('user_id', $userId)->get();
-
+        $accounts = Fractal::create()->collection($accounts)->transformWith(new AccountTransformer())->toArray();
         return response()->json($accounts);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function create_account(Request $request)
     {
         $userId = Auth::id();
@@ -38,17 +45,20 @@ class AccountController extends Controller
         if($validate->fails()) {
             return response()->json($validate->errors(), 422);
         }
-
-        Account::create([
+        $account = Account::create([
             'bank_id' => $request->bank,
             'name' => $request->nameAccount,
             'identification' => $request->dniAccount,
             'number' => $request->numberAccount,
             'user_id' => $userId
         ]);
+
+        $accountCreated = Account::find($account->id);
+
         $data = [
             'response' => true,
-            'message' => 'Cuenta creada correctamente'
+            'message' => 'Cuenta creada correctamente',
+            'data' => $accountCreated
         ];
         return response()->json($data);
     }

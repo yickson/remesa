@@ -26,12 +26,12 @@
                                 <th>Acciones</th>
                             </tr>
                             <tr v-for="listAccount in listAccounts">
-                                <th>{{ listAccount.bank_id }}</th>
+                                <th>{{ listAccount.bank }}</th>
                                 <th>{{ listAccount.name }}</th>
                                 <th>{{ listAccount.identification }}</th>
                                 <th>{{ listAccount.number}}</th>
-                                <th>{{ listAccount.created_at}}</th>
-                                <th> - </th>
+                                <th>{{ listAccount.date}}</th>
+                                <th><button type="button" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button><button type="button" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button></th>
                             </tr>
                             </thead>
                         </table>
@@ -41,7 +41,7 @@
             </div>
         </div>
         <!-- Modal -->
-        <div class="modal fade" id="createBankAccount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal fade" id="createBankAccount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ref="vuemodal">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -113,6 +113,7 @@
               };
               axios.post('create_account', account)
                   .then(response => {
+                      console.log(response.data);
                       if(response.data){
                           this.$swal({
                               title: 'Contacto',
@@ -122,7 +123,7 @@
                               showConfirmButton: false
                           }).then(
                               function () {
-                                  console.log(response);
+                                  console.log(response.data);
                               },
                               function (dismiss) {
                                   if (dismiss === 'timer') {
@@ -148,7 +149,7 @@
           listAccountBanks() {
               axios.get('get_accounts')
               .then(response => {
-                  this.listAccounts = response.data;
+                  this.listAccounts = response.data.data;
               })
               .catch(e => console.log(e))
           }
