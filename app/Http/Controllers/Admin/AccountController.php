@@ -63,6 +63,27 @@ class AccountController extends Controller
         return response()->json($data);
     }
 
+    public function delete_account(int $id)
+    {
+        $account = Account::find($id);
+        if($account){
+            Account::destroy($account->id);
+            $data = [
+                'response' => true,
+                'message' => 'Cuenta eliminada correctamente',
+                'data' => ''
+            ];
+            return response()->json($data);
+        } else {
+            $data = [
+                'response' => false,
+                'message' => 'Esta cuenta no existe',
+                'data' => ''
+            ];
+            return response()->json($data);
+        }
+    }
+
     public function create()
     {
         $banks = Bank::all();

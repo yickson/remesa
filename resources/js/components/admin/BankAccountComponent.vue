@@ -31,7 +31,10 @@
                                 <th>{{ listAccount.identification }}</th>
                                 <th>{{ listAccount.number}}</th>
                                 <th>{{ listAccount.date}}</th>
-                                <th><button type="button" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button><button type="button" class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i></button></th>
+                                <th>
+                                    <button type="button" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></button>
+                                    <button type="button" class="btn btn-danger" @click="deleteAccountBank(listAccount.id)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                </th>
                             </tr>
                             </thead>
                         </table>
@@ -138,6 +141,43 @@
                           this.listAccountBanks();
                       }
                   }).catch(e => console.log(e));
+          },
+          deleteAccountBank(id) {
+              console.log(id);
+              this.$swal({
+                  title: '¿Estás seguro de borrar la cuenta bancaria?',
+                  text: "Una vez hecho esto no se puede revertir",
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: 'Si, borrar',
+                  cancelButtonText: 'Cancelar'
+              }).then((result) => {
+                  if (result.value) {
+                      axios.delete(`delete_account/${id}`)
+                      .then(response => {
+                          console.log(response.data);
+                          if(response.data.response) {
+                              this.$swal({
+                                  title: 'Cuenta eliminada',
+                                  text: 'De forma exitosa',
+                                  icon: 'success',
+                                  showConfirmButton: false,
+                                  timer: 1800,
+                              })
+                              this.listAccountBanks();
+                          } else {
+                              this.$swal(
+                                  'Error',
+                                  'Cuenta bancaria no existe',
+                                  'error'
+                              )
+                          }
+                      })
+
+                  }
+              })
           },
           listBanks() {
               axios.get('list_banks')
