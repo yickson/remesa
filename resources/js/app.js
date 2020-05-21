@@ -5,7 +5,6 @@
  */
 
 require('./bootstrap');
-
 window.Vue = require('vue');
 
 /**
@@ -18,7 +17,8 @@ window.Vue = require('vue');
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+import Notifications from 'vue-notification'
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 import VueSweetalert2 from 'vue-sweetalert2';
@@ -31,7 +31,8 @@ Vue.component('contact-component', ContactComponent);
 //Component Administrator
 Vue.component('bank-account-component', BankAccountComponent)
 
-
+Vue.use(BootstrapVue);
+Vue.use(Notifications);
 Vue.use(VueSweetalert2);
 
 const app = new Vue({

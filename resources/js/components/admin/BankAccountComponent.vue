@@ -1,15 +1,11 @@
 <template>
     <div class="row">
-        <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#createBankAccount">
-            Crear cuenta bancaria
-        </button>
         <div class="col-12">
             <div class="card">
                 <div class="card-header">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h3 class="card-title">Listado de mis cuentas bancarias</h3>
-                        </div>
+                    <h3 class="card-title">Listado de mis cuentas bancarias</h3>
+                    <div class="card-tools">
+                        <b-button class="btn btn-primary float-right" v-b-modal.modal-1>Crear cuenta bancaria</b-button>
                     </div>
                 </div>
                 <!-- /.card-header -->
@@ -44,46 +40,56 @@
             </div>
         </div>
         <!-- Modal -->
-        <div class="modal fade" id="createBankAccount" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ref="vuemodal">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel">Ingresar cuenta bancaria</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="callout callout-info">
-                            <h5>Información importante</h5>
-                            <p>Acá van los datos de la cuenta a la que se envía dinero en Venezuela.</p>
-                        </div>
-                        <form id="createAccountBank">
-                            <div class="form-group">
-                                <label for="bankId">Banco</label>
-                                <select name="bankId" class="form-control" id="bankId" v-model="bank">
-                                    <option v-for="banka in banks" :value="banka.id">{{banka.name}}</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="accountNumber">Número de cuenta</label>
-                                <input type="text" class="form-control" id="accountNumber" v-model="numberAccount">
-                            </div>
-                            <div class="form-group">
-                                <label for="accountName">Nombre titular de cuenta</label>
-                                <input type="text" class="form-control" id="accountName" v-model="nameAccount">
-                            </div>
-                            <div class="form-group">
-                                <label for="accountDNI">Cédula de identidad</label>
-                                <input type="text" class="form-control" id="accountDNI" v-model="dniAccount">
-                            </div>
-                            <button class="btn btn-primary" @click="createAccountBank">Crear</button>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <b-modal id="modal-1" title="Ingresa la cuenta bancaria">
+            <b-form @submit="createAccountBank" @reset="onReset" v-if="show">
+                <b-form-group
+                        id="input-group-1"
+                        label="Nombre de titular"
+                        label-for="input-1"
+                >
+                    <b-form-input
+                            id="input-1"
+                            v-model="form.nameAccount"
+                            type="text"
+                            required
+                            placeholder="Ingresar nombre titular"
+                    ></b-form-input>
+                </b-form-group>
+
+                <b-form-group id="input-group-2" label="Número de cuenta" label-for="input-2">
+                    <b-form-input
+                            id="input-2"
+                            v-model="form.numberAccount"
+                            required
+                            placeholder="Número de cuenta"
+                    ></b-form-input>
+                </b-form-group>
+
+                <b-form-group id="input-group-3" label="Cédula de identidad" label-for="input-3">
+                    <b-form-input
+                            id="input-3"
+                            v-model="form.dniAccount"
+                            required
+                            placeholder="Número de cédula"
+                    ></b-form-input>
+                </b-form-group>
+
+                <b-form-group id="input-group-4" label="Bancos" label-for="input-4">
+                    <b-form-select
+                            id="input-4"
+                            v-model="form.bank"
+                            :options="banks"
+                            value-field="id"
+                            text-field="name"
+                            required
+                    ></b-form-select>
+                </b-form-group>
+
+                <b-button type="submit" variant="primary">Crear cuenta bancaria</b-button>
+                <b-button type="reset" variant="danger">Reset</b-button>
+            </b-form>
+        </b-modal>
+        <notifications group="bankAccount" />
     </div>
 
 </template>
@@ -103,41 +109,38 @@
                 numberAccount: '',
                 nameAccount: '',
                 dniAccount: '',
+                show: true,
+                form: {
+                    bank: '',
+                    numberAccount: '',
+                    nameAccount: '',
+                    dniAccount: '',
+                }
             };
         },
         methods:{
           createAccountBank(e) {
               e.preventDefault();
               let account = {
-                bank: this.bank,
-                numberAccount: this.numberAccount,
-                nameAccount: this.nameAccount,
-                dniAccount: this.dniAccount
+                bank: this.form.bank,
+                numberAccount: this.form.numberAccount,
+                nameAccount: this.form.nameAccount,
+                dniAccount: this.form.dniAccount
               };
               axios.post('create_account', account)
                   .then(response => {
                       console.log(response.data);
                       if(response.data){
-                          this.$swal({
-                              title: 'Contacto',
-                              text: 'Ha sido enviado correctamente.',
-                              timer: 2000,
-                              showCancelButton: false,
-                              showConfirmButton: false
-                          }).then(
-                              function () {
-                                  console.log(response.data);
-                              },
-                              function (dismiss) {
-                                  if (dismiss === 'timer') {
-                                      //console.log('I was closed by the timer')
-                                  }
-                              }
-                          );
-                          this.bank = '';
-                          this.nameAccount = '';
-                          this.numberAccount = '';
-                          this.dniAccount = '';
+                          this.$bvModal.hide('modal-1');
+                          this.$notify({
+                              group: 'bankAccount',
+                              title: 'Cuenta creada',
+                              text: '¡Ha sido creada exitosamente!'
+                          });
+                          this.form.bank = '';
+                          this.form.nameAccount = '';
+                          this.form.numberAccount = '';
+                          this.form.dniAccount = '';
                           this.listAccountBanks();
                       }
                   }).catch(e => console.log(e));
@@ -192,7 +195,20 @@
                   this.listAccounts = response.data.data;
               })
               .catch(e => console.log(e))
-          }
+          },
+            onReset(evt) {
+                evt.preventDefault()
+                // Reset our form values
+                this.form.bank = '';
+                this.form.nameAccount = '';
+                this.form.numberAccount = '';
+                this.form.dniAccount = '';
+                // Trick to reset/clear native browser form validation state
+                this.show = false;
+                this.$nextTick(() => {
+                    this.show = true
+                })
+            }
         },
         name: "BankAccountComponent"
     }
