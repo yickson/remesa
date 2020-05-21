@@ -63,6 +63,44 @@ class AccountController extends Controller
         return response()->json($data);
     }
 
+    public function update_account(Request $request)
+    {
+        $validate = Validator::make($request->all(), [
+            'id' => 'required|numeric',
+            'bank' => 'required|numeric',
+            'nameAccount' => 'required',
+            'numberAccount' => 'required|numeric',
+            'dniAccount' => 'required|numeric',
+        ]);
+
+        if($validate->fails()) {
+            return response()->json($validate->errors(), 422);
+        }
+
+        $account = Account::find($request->id);
+        if($account) {
+           $account->bank_id = $request->bank;
+           $account->name = $request->nameAccount;
+           $account->number = $request->numberAccount;
+           $account->identification = $request->dniAccount;
+           $account->save();
+
+            $data = [
+                'response' => true,
+                'message' => 'Cuenta creada correctamente',
+                'data' => ''
+            ];
+            return response()->json($data);
+        } else {
+            $data = [
+                'response' => true,
+                'message' => 'No existe la cuenta creada',
+                'data' => 'Error'
+            ];
+            return response()->json($data);
+        }
+    }
+
     public function delete_account(int $id)
     {
         $account = Account::find($id);

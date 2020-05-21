@@ -12,6 +12,7 @@ class AccountTransformer extends TransformerAbstract
         return [
             'id' => $account->id,
             'bank' => $account->bank->name,
+            'bank_id' => $account->bank_id,
             'date' => $account->created_at->format('d-m-Y'),
             'identification' => $account->identification,
             'name' => $account->name,

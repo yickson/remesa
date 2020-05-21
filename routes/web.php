@@ -45,6 +45,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'web', 'prefix' => 'admin'
    Route::get('account/create', 'AccountController@create')->name('cuenta.crear');
    Route::post('create_account', 'AccountController@create_account')->name('cuenta.almacenar');
    Route::get('get_accounts', 'AccountController@list_accounts');
+   Route::post('update_account', 'AccountController@update_account');
    Route::delete('delete_account/{id}', 'AccountController@delete_account');
 
 
