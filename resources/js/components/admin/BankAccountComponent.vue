@@ -217,8 +217,8 @@
               console.log(id);
               this.$bvModal.msgBoxConfirm('Una vez hecho esto, es irreversible', {
                   title: '¿Estás seguro de eliminar la cuenta bancaria?',
-                  size: 'sm',
-                  buttonSize: 'sm',
+                  size: 'md',
+                  buttonSize: 'md',
                   okVariant: 'danger',
                   okTitle: 'Si',
                   cancelTitle: 'No',
