@@ -26,10 +26,12 @@ import RateComponent from "./components/RateComponent";
 import ContactComponent from "./components/ContactComponent";
 //Import Admin
 import BankAccountComponent from "./components/admin/BankAccountComponent";
+import DemandComponent from "./components/admin/DemandComponent";
 Vue.component('rate-component', RateComponent);
 Vue.component('contact-component', ContactComponent);
 //Component Administrator
-Vue.component('bank-account-component', BankAccountComponent)
+Vue.component('bank-account-component', BankAccountComponent);
+Vue.component('demand-component', DemandComponent);
 
 Vue.use(BootstrapVue);
 Vue.use(Notifications);

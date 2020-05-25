@@ -32,6 +32,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Order extends Model
 {
+    const STARTING = 'Iniciando';
+    const PROCESSING = 'Procesando';
+    const FINISHED = 'Finalizada';
+    const CANCELLED = 'Cancelada';
+
     protected $fillable = [
       'locator',
       'amount',
