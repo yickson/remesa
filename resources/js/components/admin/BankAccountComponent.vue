@@ -28,8 +28,8 @@
                                 <th>{{ listAccount.number}}</th>
                                 <th>{{ listAccount.date}}</th>
                                 <th>
-                                    <b-button variant="primary" class="btn btn-primary float-right" @click="editAccountBank(listAccount)" v-b-modal.modal-2><i class="fa fa-pencil-square-o" aria-hidden="true"></i></b-button>
-                                    <button type="button" class="btn btn-danger" @click="deleteAccountBank(listAccount.id)"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                                    <b-button variant="primary" @click="editAccountBank(listAccount)" v-b-modal.modal-2><i class="fa fa-pencil-square-o" aria-hidden="true"></i></b-button>
+                                    <b-button variant="danger" @click="deleteAccountBank(listAccount.id)"><i class="fa fa-trash-o" aria-hidden="true"></i></b-button>
                                 </th>
                             </tr>
                             </thead>
@@ -137,7 +137,6 @@
         </b-modal>
         <notifications group="bankAccount" />
     </div>
-
 </template>
 
 <script>
@@ -216,40 +215,42 @@
           },
           deleteAccountBank(id) {
               console.log(id);
-              this.$swal({
-                  title: '¿Estás seguro de borrar la cuenta bancaria?',
-                  text: "Una vez hecho esto no se puede revertir",
-                  icon: 'warning',
-                  showCancelButton: true,
-                  confirmButtonColor: '#3085d6',
-                  cancelButtonColor: '#d33',
-                  confirmButtonText: 'Si, borrar',
-                  cancelButtonText: 'Cancelar'
-              }).then((result) => {
-                  if (result.value) {
-                      axios.delete(`delete_account/${id}`)
-                      .then(response => {
-                          console.log(response.data);
-                          if(response.data.response) {
-                              this.$swal({
-                                  title: 'Cuenta eliminada',
-                                  text: 'De forma exitosa',
-                                  icon: 'success',
-                                  showConfirmButton: false,
-                                  timer: 1800,
-                              })
-                              this.listAccountBanks();
-                          } else {
-                              this.$swal(
-                                  'Error',
-                                  'Cuenta bancaria no existe',
-                                  'error'
-                              )
-                          }
-                      })
-
-                  }
+              this.$bvModal.msgBoxConfirm('Una vez hecho esto, es irreversible', {
+                  title: '¿Estás seguro de eliminar la cuenta bancaria?',
+                  size: 'sm',
+                  buttonSize: 'sm',
+                  okVariant: 'danger',
+                  okTitle: 'Si',
+                  cancelTitle: 'No',
+                  footerClass: 'p-2',
+                  hideHeaderClose: false,
+                  centered: true
               })
+                  .then(value => {
+                      if(value) {
+                          axios.delete(`delete_account/${id}`)
+                              .then(response => {
+                                  console.log(response.data);
+                                  if(response.data.response) {
+                                      this.$notify({
+                                          group: 'bankAccount',
+                                          title: 'Cuenta eliminada',
+                                          text: '¡Ha sido eliminada exitosamente!'
+                                      });
+                                      this.listAccountBanks();
+                                  } else {
+                                      this.$swal(
+                                          'Error',
+                                          'Cuenta bancaria no existe',
+                                          'error'
+                                      )
+                                  }
+                              })
+                      }
+                  })
+                  .catch(err => {
+                      console.log(err)
+                  })
           },
           listBanks() {
               axios.get('list_banks')
