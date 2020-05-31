@@ -1,54 +1,38 @@
 <template>
-    <div class="row">
-        <div class="col-6">
-            <div class="card bg-light mb-3">
-                <div class="card-header">La tasa de hoy</div>
-                <div class="card-body">
-                    <h4 class="card-title">{{ rate }}</h4>
-                </div>
-            </div>
-        </div>
         <div id="app" class="col-6">
             <div class="card bg-light mb-3">
                 <div class="card-header">Calculadora en tiempo real</div>
                 <div class="card-body">
                     <div class="form-group">
                         <label>Pesos chilenos a Bolívares</label>
-                        <input v-model="money" class="form-control" type="text">
+                        <input v-validate="'min_value:20000'" v-model="money" class="form-control" type="number" data-vv-as="monto" name="min_value_field">
                     </div>
-                    <p id="total">
-                        Dinero a recibir: {{ money * rate | currency }}
+                    <div v-show="errors.all().length" >
+                        <ul>
+                            <li v-for="(error, i) in errors.all()">{{error}}</li>
+                        </ul>
+                    </div>
+                    <p>
+                        Dinero a recibir: {{ money * rate | currency }} - Monto de cambio: {{ money | currencyCLP}}
                     </p>
                 </div>
             </div>
         </div>
-    </div>
 </template>
 <script>
+    import {rateMixin} from "./mixins/rateMixin";
     export default {
         template: 'rate-component',
         data() {
             return {
-                rate: '',
                 money: 30000
             }
         },
-        methods: {
-          getRate() {
-              axios.get('rate')
-              .then(response => {
-                  this.rate = response.data.value;
-              })
-              .catch(e => console.log(e))
-          }
-        },
         filters: {
-            currency: function (value) {
-                return parseFloat(value).toFixed(0)+' BsS';
+            currencyCLP: function (value) {
+                return '$'+ new Intl.NumberFormat("es-CL").format(value);
             }
         },
-        mounted() {
-            this.getRate();
-        }
+        mixins: [rateMixin]
     }
 </script>

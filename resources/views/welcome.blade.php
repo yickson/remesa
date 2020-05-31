@@ -9,5 +9,8 @@
             <a class="btn btn-primary" href="{{ route('register') }}" role="button">Regístrarme</a>
         </p>
     </div>
+    <div class="row">
+    <rate-now-component></rate-now-component>
     <rate-component></rate-component>
+    </div>
 @endsection

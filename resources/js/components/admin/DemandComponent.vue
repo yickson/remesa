@@ -35,18 +35,7 @@
                 <!-- /.card-body -->
             </div>
         </div>
-        <div class="col-6">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="card-title">Tasa del día</h3>
-                </div>
-                <!-- /.card-header -->
-                <div class="card-body">
-                    <p>La tasa es 202</p>
-                </div>
-                <!-- /.card-body -->
-            </div>
-        </div>
+        <rate-component></rate-component>
         <notifications group="demand" />
     </div>
 </template>
@@ -64,6 +53,8 @@
                     account: '',
                     amount: 20000,
                 },
+                amountRate: 20000,
+                rate: '',
                 show: true
             }
         },
@@ -105,6 +96,10 @@
                         });
                     }
                 })
+          },
+          getRateExchange() {
+              axios.get('rate')
+              .then(response => this.rate = response.data.data)
           }
         },
         name: "DemandComponent"

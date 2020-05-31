@@ -44,6 +44,7 @@
             {
                 fetch('list_demands').then(resp => resp.json())
                     .then(data => {
+                        console.log(data);
                         generar_tabla(data)
                     })
                     .catch(err => {
