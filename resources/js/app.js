@@ -31,6 +31,7 @@ import RateNowComponent from "./components/RateNowComponent";
 import ContactComponent from "./components/ContactComponent";
 //Import Admin
 import BankAccountComponent from "./components/admin/BankAccountComponent";
+import BankComponent from "./components/admin/BankComponent";
 import DemandComponent from "./components/admin/DemandComponent";
 //Import MicroComponents
 import ErrorsValidateComponent from "./components/microComponents/ErrorsValidate";
@@ -40,6 +41,7 @@ Vue.component('rate-now-component', RateNowComponent);
 Vue.component('contact-component', ContactComponent);
 //Component Administrator
 Vue.component('bank-account-component', BankAccountComponent);
+Vue.component('bank-component', BankComponent);
 Vue.component('demand-component', DemandComponent);
 
 Vue.use(BootstrapVue);

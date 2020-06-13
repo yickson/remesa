@@ -214,7 +214,6 @@
                }).catch(e => console.log(e));
           },
           deleteAccountBank(id) {
-              console.log(id);
               this.$bvModal.msgBoxConfirm('Una vez hecho esto, es irreversible', {
                   title: '¿Estás seguro de eliminar la cuenta bancaria?',
                   size: 'md',
