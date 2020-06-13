@@ -8,10 +8,9 @@ export const banksMixin = {
         getBanks() {
             axios.get('./list_banks')
                 .then(response => {
-                    console.log(response.data);
                     this.banks = response.data;
                 })
-                .catch(e => console.log(e))
+                .catch(e => console.error(e))
         }
     },
     mounted() {

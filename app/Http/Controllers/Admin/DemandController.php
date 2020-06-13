@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Functions\Utilities;
 use App\Order;
+use App\Transformers\OrderTransformer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Spatie\Fractalistic\Fractal;
 use Validator;
 
 class DemandController extends Controller
@@ -19,18 +21,8 @@ class DemandController extends Controller
     public function list_demands()
     {
         $orders = Order::with(['account' => function($q){ $q->with('bank'); }])->where('user_id', auth()->id())->get();
-        $data = [];
-        foreach ($orders as $i => $order) {
-            $data[$i]['locator'] = $order->locator;
-            $data[$i]['amount'] = $order->amount;
-            $data[$i]['bank'] = $order->account->bank->name;
-            $data[$i]['account_name'] = $order->account->name;
-            $data[$i]['account_dni'] = $order->account->identification;
-            $data[$i]['account_number'] = $order->account->number;
-            $data[$i]['status'] = $order->status;
-            $data[$i]['date'] = $order->created_at->format('d-m-Y');
-        }
-        return response()->json($data);
+        $orders = Fractal::create()->collection($orders)->transformWith(new OrderTransformer())->toArray();
+        return response()->json($orders);
     }
 
     public function create()

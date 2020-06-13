@@ -33,6 +33,7 @@ import ContactComponent from "./components/ContactComponent";
 import BankAccountComponent from "./components/admin/BankAccountComponent";
 import BankComponent from "./components/admin/BankComponent";
 import DemandComponent from "./components/admin/DemandComponent";
+import DemandsComponent from "./components/admin/DemandsComponent";
 //Import MicroComponents
 import ErrorsValidateComponent from "./components/microComponents/ErrorsValidate";
 Vue.component('errors-validate-component', ErrorsValidateComponent)
@@ -43,6 +44,8 @@ Vue.component('contact-component', ContactComponent);
 Vue.component('bank-account-component', BankAccountComponent);
 Vue.component('bank-component', BankComponent);
 Vue.component('demand-component', DemandComponent);
+Vue.component('demands-component', DemandsComponent);
+
 
 Vue.use(BootstrapVue);
 Vue.use(VeeValidate);
