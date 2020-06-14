@@ -11,14 +11,14 @@ class OrderTransformer extends TransformerAbstract
     {
         return [
             'id' => $order->id,
-            'locator' => $order->locator,
-            'amount' => $order->amount,
-            'bank' => $order->account->bank->name,
-            'date' => $order->created_at->format('d-m-Y'),
-            'identification' => $order->account->identification,
-            'name' => $order->account->name,
-            'number' => $order->account->number,
-            'status' => $order->status
+            'localizador' => $order->locator,
+            'monto' => $order->amount,
+            'banco' => $order->account->bank->name,
+            'fecha' => $order->created_at->format('d-m-Y'),
+            'cedula' => $order->account->identification,
+            'nombre' => $order->account->name,
+            'cuenta' => $order->account->number,
+            'estatus' => $order->status
         ];
     }
 }
