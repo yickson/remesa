@@ -23,9 +23,8 @@ import VueCurrencyFilter from 'vue-currency-filter';
 import VeeValidate, { Validator } from 'vee-validate';
 import es from 'vee-validate/dist/locale/es';
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-
 import VueSweetalert2 from 'vue-sweetalert2';
+import {ClientTable} from 'vue-tables-2';
 import RateComponent from "./components/RateComponent";
 import RateNowComponent from "./components/RateNowComponent";
 import ContactComponent from "./components/ContactComponent";
@@ -48,7 +47,8 @@ Vue.component('demands-component', DemandsComponent);
 
 
 Vue.use(BootstrapVue);
-Vue.use(VeeValidate);
+Vue.use(ClientTable);
+Vue.use(VeeValidate, {fieldsBagName: 'formFields'});
 Validator.localize("es", es);
 Vue.use(Notifications);
 Vue.use(VueSweetalert2);
