@@ -25,6 +25,7 @@ import es from 'vee-validate/dist/locale/es';
 
 import VueSweetalert2 from 'vue-sweetalert2';
 import {ClientTable} from 'vue-tables-2';
+import Pagination from 'vue-pagination-2';
 import RateComponent from "./components/RateComponent";
 import RateNowComponent from "./components/RateNowComponent";
 import ContactComponent from "./components/ContactComponent";
@@ -33,8 +34,11 @@ import BankAccountComponent from "./components/admin/BankAccountComponent";
 import BankComponent from "./components/admin/BankComponent";
 import DemandComponent from "./components/admin/DemandComponent";
 import DemandsComponent from "./components/admin/DemandsComponent";
+import RateAdminComponent from "./components/admin/RateComponent";
+import UserComponent from "./components/admin/UserComponent";
 //Import MicroComponents
 import ErrorsValidateComponent from "./components/microComponents/ErrorsValidate";
+
 Vue.component('errors-validate-component', ErrorsValidateComponent)
 Vue.component('rate-component', RateComponent);
 Vue.component('rate-now-component', RateNowComponent);
@@ -44,9 +48,12 @@ Vue.component('bank-account-component', BankAccountComponent);
 Vue.component('bank-component', BankComponent);
 Vue.component('demand-component', DemandComponent);
 Vue.component('demands-component', DemandsComponent);
+Vue.component('rate-admin-component', RateAdminComponent);
+Vue.component('user-component', UserComponent);
 
 
 Vue.use(BootstrapVue);
+//Vue.component('pagination', Pagination);
 Vue.use(ClientTable);
 Vue.use(VeeValidate, {fieldsBagName: 'formFields'});
 Validator.localize("es", es);

@@ -6,6 +6,7 @@
 
 <script>
     export default {
+        name: 'demands-component',
         mounted() {
             this.getOrders();
         },

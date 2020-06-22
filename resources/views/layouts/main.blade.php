@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="{{ asset('fonts/icomoon/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-datepicker.css') }}">
-{{--    <link rel="stylesheet" href="{{ asset('css/aos.css') }}">--}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
 

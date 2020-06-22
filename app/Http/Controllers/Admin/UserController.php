@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Transformers\UserTransformer;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Spatie\Fractalistic\Fractal;
 
 class UserController extends Controller
 {
@@ -16,7 +18,8 @@ class UserController extends Controller
 
     public function list_users()
     {
-        $usuarios = User::all();
-        return response()->json($usuarios);
+        $users = User::all();
+        $users = Fractal::create()->collection($users)->transformWith(new UserTransformer())->toArray();
+        return response()->json($users);
     }
 }
