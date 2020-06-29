@@ -63,8 +63,7 @@
               axios.get('get_accounts')
                   .then(response => {
                       let accounts = response.data.data;
-                      let myAccounts = accounts.map(this.getFullAccount);
-                      this.listAccounts = myAccounts;
+                      this.listAccounts = accounts.map(this.getFullAccount);
                   })
                   .catch(e => console.log(e))
           },

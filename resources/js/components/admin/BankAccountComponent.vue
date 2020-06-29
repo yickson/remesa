@@ -171,7 +171,6 @@
               };
               axios.post('create_account', account)
                   .then(response => {
-                      console.log(response.data);
                       if(response.data){
                           this.$bvModal.hide('modal-1');
                           this.$notify({
@@ -229,7 +228,6 @@
                       if(value) {
                           axios.delete(`delete_account/${id}`)
                               .then(response => {
-                                  console.log(response.data);
                                   if(response.data.response) {
                                       this.$notify({
                                           group: 'bankAccount',

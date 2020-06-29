@@ -29,6 +29,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'web', 'prefix' => 'admin'
 
       Route::get('rates', 'RateController@index')->name('tasas');
       Route::get('list_rates', 'RateController@list_rates')->name('listar_tasas');
+      Route::post('create_rate', 'RateController@create_rate');
 
       Route::get('banks', 'BankController@index')->name('bancos');
       Route::get('list_banks', 'BankController@list_banks')->name('listar_bancos');

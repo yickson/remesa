@@ -21,4 +21,32 @@ class RateController extends Controller
         $rates = Fractal::create()->collection($rates)->transformWith(new RateTransformer())->toArray();
         return response()->json($rates);
     }
+
+    public function create_rate(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'rate' => 'required|numeric'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()->all()]);
+        }
+
+        Rate::create([
+            'value' => $request->rate
+        ]);
+
+        $data = [
+            'response' => true,
+            'message' => 'Tasa creada correctamente',
+            'data' => ''
+        ];
+
+        return response()->json($data);
+    }
+
+    public function update_rate()
+    {
+
+    }
 }
