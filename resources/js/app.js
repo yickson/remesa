@@ -36,6 +36,7 @@ import DemandComponent from "./components/admin/DemandComponent";
 import DemandsComponent from "./components/admin/DemandsComponent";
 import RateAdminComponent from "./components/admin/RateComponent";
 import UserComponent from "./components/admin/UserComponent";
+import OrdersComponent from "./components/admin/OrdersComponent";
 //Import MicroComponents
 import ErrorsValidateComponent from "./components/microComponents/ErrorsValidate";
 
@@ -50,6 +51,7 @@ Vue.component('demand-component', DemandComponent);
 Vue.component('demands-component', DemandsComponent);
 Vue.component('rate-admin-component', RateAdminComponent);
 Vue.component('user-component', UserComponent);
+Vue.component('orders-component', OrdersComponent);
 
 
 Vue.use(BootstrapVue);
