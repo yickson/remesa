@@ -19,7 +19,7 @@
                             :current-page="currentPage"
                     >
                         <template v-slot:cell(actions)="item">
-                            <b-btn size="sm" @click="info(item.item)" v-b-modal.modal-1 class="mr-1">Details</b-btn>
+                            <b-btn size="sm" @click="info(item.item)" v-b-modal.modal-1 class="mr-1">Transferir</b-btn>
                         </template>
                     </b-table>
                 </div>
@@ -34,7 +34,7 @@
                 </div>
             </div>
         </div>
-        <b-modal id="modal-1" title="Realizar transferencia" ok-only ok-title="Transferencia hecha">
+        <b-modal id="modal-1" title="Realizar transferencia" ok-only @ok="handleOk" ok-title="Transferencia hecha">
             <b-list-group>
                 <b-list-group-item>Localizador: {{ item.localizador }}</b-list-group-item>
                 <b-list-group-item>Monto: {{ item.monto }}</b-list-group-item>
@@ -44,7 +44,7 @@
                 <b-list-group-item>Cuenta: {{ item.cuenta }}</b-list-group-item>
                 <b-list-group-item>Estatus: {{ item.estatus }}</b-list-group-item>
             </b-list-group>
-            <b-form @submit.stop.prevent="changeStatus" v-if="show">
+            <b-form @submit.stop.prevent="makeDeposit" v-if="show">
                 <b-form-group
                         id="input-group-1"
                         label="Número de referencia"
@@ -71,7 +71,6 @@
                             placeholder="Ingresar monto transferido"
                     ></b-form-input>
                 </b-form-group>
-                <input type="hidden" :value="item.id">
             </b-form>
         </b-modal>
         <notifications group="orders" />
@@ -104,7 +103,9 @@
                 item: {},
                 deposit: {
                     reference: '',
-                    amount: ''
+                    amount: '',
+                    user: '',
+                    order: ''
                 }
             }
         },
@@ -117,23 +118,40 @@
                     .catch(e => console.log(e))
             },
             info(item) {
-                console.log(item);
                 this.item = item;
+                if (item.estatus === 'Finalizada') {
+                    this.show = false;
+                } else {
+                    this.show = true;
+                    this.deposit.user = item.user;
+                    this.deposit.order = item.id;
+                }
+
             },
             handleOk(bvModalEvt) {
                 bvModalEvt.preventDefault()
-                this.changeStatus()
+                this.makeDeposit()
             },
-            changeStatus() {
-                axios.post('change_status', {'rate':this.rate})
+            makeDeposit() {
+                axios.post('deposit', this.deposit)
                     .then(response => {
                         this.$bvModal.hide('modal-1');
                         if(response.data.message) {
                             this.$notify({
                                 group: 'orders',
-                                title: 'Tasa de cambio creada',
+                                title: 'Transferencia',
                                 text: '¡Ha sido creada exitosamente!'
                             });
+                            this.deposit.amount = '';
+                            this.deposit.reference = '';
+                            this.getOrders();
+                        } else {
+                            this.$notify({
+                                group: 'orders',
+                                title: 'Transferencia',
+                                text: 'Error al realizar la transferencia',
+                                type: 'error'
+                            })
                         }
                     })
                     .catch(error => console.error(error))

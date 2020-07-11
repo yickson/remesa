@@ -36,6 +36,8 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'web', 'prefix' => 'admin'
 
       Route::get('users', 'UserController@index')->name('usuarios');
       Route::get('list_users', 'UserController@list_users')->name('listar_usuarios');
+
+      Route::post('deposit', 'DepositController@create_deposit');
    });
 
    Route::get('demand', 'DemandController@create')->name('solicitud');

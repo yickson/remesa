@@ -11,6 +11,7 @@ class OrderTransformer extends TransformerAbstract
     {
         return [
             'id' => $order->id,
+            'user' => $order->account_id,
             'localizador' => $order->locator,
             'monto' => $order->amount,
             'banco' => $order->account->bank->name,
