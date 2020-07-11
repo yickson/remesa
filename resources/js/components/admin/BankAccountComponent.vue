@@ -40,8 +40,8 @@
             </div>
         </div>
         <!-- Modal -->
-        <b-modal cancel-title="Cancelar" ok-disabled id="modal-1" title="Ingresa la cuenta bancaria">
-            <b-form @submit="createAccountBank" @reset="onReset" v-if="show">
+        <b-modal cancel-title="Cancelar" ok-title="Crear cuenta bancaria" @ok="handleCreateAccount" id="modal-1" title="Ingresa la cuenta bancaria">
+            <b-form @submit.stop.prevent="createAccountBank" @reset="onReset" v-if="show">
                 <b-form-group
                         id="input-group-1"
                         label="Nombre de titular"
@@ -84,11 +84,10 @@
                             required
                     ></b-form-select>
                 </b-form-group>
-                <b-button type="submit" variant="primary">Crear cuenta bancaria</b-button>
                 <b-button type="reset" variant="danger">Reset</b-button>
             </b-form>
         </b-modal>
-        <b-modal cancel-title="Cancelar" ok-disabled id="modal-2" title="Edita la cuenta bancaria">
+        <b-modal cancel-title="Cancelar" ok-title="Editar cuenta bancaria" @ok="handleEditAccount" id="modal-2" title="Edita la cuenta bancaria">
             <b-form @submit="updateAccountBank" v-if="show">
                 <b-form-group
                         id="input-group-5"
@@ -132,7 +131,6 @@
                             required
                     ></b-form-select>
                 </b-form-group>
-                <b-button type="submit" variant="primary">Editar cuenta bancaria</b-button>
             </b-form>
         </b-modal>
         <notifications group="bankAccount" />
@@ -161,8 +159,15 @@
             };
         },
         methods:{
-          createAccountBank(e) {
-              e.preventDefault();
+          handleCreateAccount(bvModalEvt) {
+              bvModalEvt.preventDefault()
+              this.createAccountBank()
+          },
+          handleEditAccount(bvModalEvt) {
+              bvModalEvt.preventDefault()
+              this.updateAccountBank()
+          },
+          createAccountBank() {
               let account = {
                 bank: this.form.bank,
                 numberAccount: this.form.numberAccount,
@@ -193,8 +198,7 @@
               this.form.numberAccount = account.number;
               this.form.dniAccount = account.identification;
           },
-          updateAccountBank(e) {
-              e.preventDefault();
+          updateAccountBank() {
               axios.post('update_account', this.form)
                .then(response => {
                    if (response.data) {
