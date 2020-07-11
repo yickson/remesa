@@ -19,7 +19,9 @@
                             :current-page="currentPage"
                     >
                         <template v-slot:cell(actions)="item">
-                            <b-btn size="sm" @click="info(item.item)" v-b-modal.modal-1 class="mr-1">Transferir</b-btn>
+                            <template v-if="item.item.estatus !== 'Finalizada'">
+                                <b-button size="sm" @click="info(item.item)" v-b-modal.modal-1 class="mr-1" variant="primary">Transferir</b-button>
+                            </template>
                         </template>
                     </b-table>
                 </div>
@@ -91,13 +93,13 @@
                 items: [],
                 fields: [
                     { key: 'localizador', label: 'Localizador'},
-                    { key: 'monto', label: 'AMonto'},
-                    { key: 'banco', label: 'Banco'},
-                    { key: 'fecha', label: 'Fecha'},
+                    { key: 'monto', label: 'Monto'},
+                    { key: 'banco', label: 'Banco', sortable: true},
+                    { key: 'fecha', label: 'Fecha', sortable: true},
                     { key: 'cedula', label: 'Cedula'},
                     { key: 'nombre', label: 'Nombre'},
                     { key: 'cuenta', label: 'Cuenta'},
-                    { key: 'estatus', label: 'Estatus'},
+                    { key: 'estatus', label: 'Estatus', sortable: true},
                     { key: 'actions', label: 'Acciones' }
                 ],
                 item: {},
