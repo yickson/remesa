@@ -17,7 +17,7 @@ class RateController extends Controller
 
     public function list_rates()
     {
-        $rates = Rate::all();
+        $rates = Rate::all()->sortByDesc('created_at');
         $rates = Fractal::create()->collection($rates)->transformWith(new RateTransformer())->toArray();
         return response()->json($rates);
     }

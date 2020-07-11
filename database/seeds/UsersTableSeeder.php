@@ -18,7 +18,9 @@ class UsersTableSeeder extends Seeder
                 'name' => 'Yickson Ramirez',
                 'email' => 'yicksonr@gmail.com',
                 'password' => bcrypt('casa2468'),
-                'type' => 'admin'
+                'type' => 'admin',
+                'created_at' => now(),
+                'updated_at' => now()
             ]
         ]);
     }

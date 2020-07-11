@@ -45,7 +45,7 @@ class DemandController extends Controller
         $order = Order::create([
             'locator' => Utilities::generateLocator(),
             'amount' => $request->amount,
-            'status' => Order::PROCESSING,
+            'status' => Order::STARTING,
             'account_id' => $request->account,
             'user_id' => $userId
         ]);

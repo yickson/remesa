@@ -10,7 +10,16 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <b-table striped hover :items="tableData"></b-table>
+                    <b-table striped hover :fields="fields" :items="tableData"></b-table>
+                </div>
+                <div class="card-footer">
+                    <b-pagination
+                            pills
+                            v-model="currentPage"
+                            :total-rows="rows"
+                            :per-page="perPage"
+                            aria-controls="my-table"
+                    ></b-pagination>
                 </div>
             </div>
         </div>
@@ -25,7 +34,15 @@
         },
         data() {
             return {
+                fields: [
+                    { key: 'id', label: 'Id'},
+                    { key: 'name', label: 'Nombre'},
+                    { key: 'email', label: 'Correo'},
+                    { key: 'date', label: 'Fecha'}
+                ],
                 tableData: [],
+                currentPage: 1,
+                perPage: 10,
             }
         },
         methods: {
@@ -36,7 +53,13 @@
                     })
                     .catch(e => console.log(e))
             }
+        },
+        computed: {
+            rows() {
+                return this.tableData.length
+            }
         }
+
     }
 </script>
 
