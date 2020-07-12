@@ -7,6 +7,7 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
+                    <b-alert v-model="noHaveAccount">Debes crear una cuenta bancaria <a href="/admin/accounts">Ir a cuentas</a></b-alert>
                     <b-form @submit="createDemand" v-if="show">
                         <b-form-group id="input-group-1" label="Cuentas bancarias" label-for="input-1">
                             <b-form-select
@@ -55,7 +56,8 @@
                 },
                 amountRate: 20000,
                 rate: '',
-                show: true
+                show: true,
+                noHaveAccount: true
             }
         },
         methods: {
@@ -64,8 +66,14 @@
                   .then(response => {
                       let accounts = response.data.data;
                       this.listAccounts = accounts.map(this.getFullAccount);
+                      this.haveAccounts();
                   })
                   .catch(e => console.log(e))
+          },
+          haveAccounts() {
+              if(this.listAccounts.length > 0) {
+                  this.noHaveAccount = false;
+              }
           },
           getFullAccount(item) {
               let data = {
