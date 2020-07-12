@@ -70,6 +70,7 @@
                             title: 'Tasa de cambio creada',
                             text: '¡Ha sido creada exitosamente!'
                         });
+                        this.getRates();
                     }
                 })
                 .catch(error => console.error(error))
