@@ -19,10 +19,10 @@
                             :current-page="currentPage"
                     >
                         <template v-slot:cell(actions)="item">
-                            <template v-if="item.item.estatus !== 'Finalizada'">
+                            <template v-if="item.item.estatus === 'Validada'">
                                 <b-button size="sm" @click="info(item.item)" v-b-modal.modal-1 class="mr-1" variant="primary">Transferir</b-button>
                             </template>
-                            <template v-if="item.item.estatus === 'Iniciando'">
+                            <template v-if="item.item.estatus === 'Procesando'">
                                 <b-button size="sm" variant="success" @click="validateOrder(item.item.id)"><i class="fa fa-check" aria-hidden="true"></i></b-button>
                             </template>
                         </template>

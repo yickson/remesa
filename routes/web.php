@@ -55,6 +55,8 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'web', 'prefix' => 'admin'
    Route::get('demands', 'DemandController@index')->name('solicitudes');
    Route::get('list_demands', 'DemandController@list_demands');
 
+   Route::post('transfer', 'TransferController@create_transfer');
+
    Route::post('bank/search', 'BankController@view');
 });
 
