@@ -59,7 +59,7 @@
                 <b-form-group id="input-group-2" label="Número de cuenta" label-for="input-2">
                     <b-form-input
                             id="input-2"
-                            v-model.number="form.numberAccount"
+                            v-model="form.numberAccount"
                             required
                             placeholder="Número de cuenta"
                     ></b-form-input>
