@@ -26,6 +26,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'web', 'prefix' => 'admin'
    Route::group(['middleware' => 'admin'], function(){
       Route::get('orders', 'OrderController@index')->name('ordenes');
       Route::get('list_orders', 'OrderController@list_orders')->name('listar_ordenes');
+      Route::get('validate/{id}', 'OrderController@validate_order');
 
       Route::get('rates', 'RateController@index')->name('tasas');
       Route::get('list_rates', 'RateController@list_rates')->name('listar_tasas');

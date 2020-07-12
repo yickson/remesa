@@ -86,6 +86,9 @@
                             title: 'Solicitud',
                             text: 'Solicitud creada exitosamente'
                         });
+                        setTimeout(() => {
+                            location.href = "/admin/demands";
+                        }, 2500);
                     } else {
                         this.$notify({
                             group: 'demand',

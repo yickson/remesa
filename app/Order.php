@@ -34,6 +34,7 @@ class Order extends Model
 {
     const STARTING = 'Iniciando';
     const PROCESSING = 'Procesando';
+    const VALIDATED = 'Validada';
     const FINISHED = 'Finalizada';
     const CANCELLED = 'Cancelada';
 

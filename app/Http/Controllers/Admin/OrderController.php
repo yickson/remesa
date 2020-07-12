@@ -21,4 +21,16 @@ class OrderController extends Controller
         $orders = Fractal::create()->collection($orders)->transformWith(new OrderTransformer())->toArray();
         return response()->json($orders);
     }
+
+    public function validate_order(int $id)
+    {
+        $order = Order::find($id);
+        if($order) {
+            $order->status = Order::VALIDATED;
+            $order->save();
+            return response()->json(['message' => 'Orden validada']);
+        } else {
+            return response()->json(['error' => 'No existe esta orden']);
+        }
+    }
 }

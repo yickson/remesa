@@ -22,6 +22,9 @@
                             <template v-if="item.item.estatus !== 'Finalizada'">
                                 <b-button size="sm" @click="info(item.item)" v-b-modal.modal-1 class="mr-1" variant="primary">Transferir</b-button>
                             </template>
+                            <template v-if="item.item.estatus === 'Iniciando'">
+                                <b-button size="sm" variant="success" @click="validateOrder(item.item.id)"><i class="fa fa-check" aria-hidden="true"></i></b-button>
+                            </template>
                         </template>
                     </b-table>
                 </div>
@@ -157,7 +160,44 @@
                         }
                     })
                     .catch(error => console.error(error))
-            }
+            },
+            validateOrder(id) {
+                this.$bvModal.msgBoxConfirm('Una vez hecho esto, es irreversible', {
+                    title: '¿Estás seguro de validar esta orden?',
+                    size: 'md',
+                    buttonSize: 'md',
+                    okVariant: 'danger',
+                    okTitle: 'Si',
+                    cancelTitle: 'No',
+                    footerClass: 'p-2',
+                    hideHeaderClose: false,
+                    centered: true
+                })
+                    .then(value => {
+                        if(value) {
+                            axios.get(`validate/${id}`)
+                                .then(response => {
+                                    if(response.data.message) {
+                                        this.$notify({
+                                            group: 'orders',
+                                            title: 'Orden modificada',
+                                            text: '¡Ha sido validada exitosamente!'
+                                        });
+                                        this.getOrders();
+                                    } else {
+                                        this.$swal(
+                                            'Error',
+                                            'Orden de cambio no existe',
+                                            'error'
+                                        )
+                                    }
+                                })
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+            },
         },
         computed: {
             rows() {
