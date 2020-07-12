@@ -11,6 +11,7 @@
                 </div>
                 <div class="card-body">
                     <b-table
+                            responsive
                             bordered hover
                             :fields="fields"
                             :items="items"

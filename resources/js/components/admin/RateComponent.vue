@@ -9,7 +9,7 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <b-table striped hover :items="tableData"></b-table>
+                    <b-table responsive striped hover :items="tableData"></b-table>
                 </div>
             </div>
         </div>
