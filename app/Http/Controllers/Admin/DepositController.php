@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Deposit;
 use App\Http\Controllers\Controller;
+use App\Mail\OrderTransferMail;
 use App\Order;
+use App\User;
 use Illuminate\Http\Request;
 use Validator;
+use Mail;
 
 class DepositController extends Controller
 {
@@ -40,10 +43,12 @@ class DepositController extends Controller
             if ($order) {
                 $order->status = Order::FINISHED;
                 $order->save();
+                $user = User::find($order->user_id);
+                Mail::to($user->email)->later(60, new OrderTransferMail($deposit, $user));
+                return response()->json(['message' => 'Depósito creado exitosamente']);
             } else {
                 return response()->json(['error' => 'Error no existe la orden']);
             }
-            return response()->json(['message' => 'Depósito creado exitosamente']);
         } else {
             return response()->json(['error' => 'Error al crear el depósito']);
         }

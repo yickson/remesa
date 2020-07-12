@@ -35,7 +35,6 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'web', 'prefix' => 'admin'
 
       Route::get('banks', 'BankController@index')->name('bancos');
 
-
       Route::get('users', 'UserController@index')->name('usuarios');
       Route::get('list_users', 'UserController@list_users')->name('listar_usuarios');
 

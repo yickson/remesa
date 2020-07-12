@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Functions\Utilities;
+use App\Mail\OrderCreatedMail;
 use App\Order;
 use App\Rate;
 use App\Transformers\OrderTransformer;
@@ -10,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Fractalistic\Fractal;
+use Illuminate\Support\Facades\Mail;
 use Validator;
 
 class DemandController extends Controller
@@ -54,6 +56,7 @@ class DemandController extends Controller
         ]);
 
         $orderCreated = Order::find($order->id);
+        Mail::to(env('EMAIL_MAIN'))->later(60, new OrderCreatedMail($orderCreated));
         $data = [
             'response' => true,
             'message' => 'Solicitud creada correctamente',
