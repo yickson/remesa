@@ -34,7 +34,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'web', 'prefix' => 'admin'
       Route::post('create_rate', 'RateController@create_rate');
 
       Route::get('banks', 'BankController@index')->name('bancos');
-      Route::get('list_banks', 'BankController@list_banks')->name('listar_bancos');
+
 
       Route::get('users', 'UserController@index')->name('usuarios');
       Route::get('list_users', 'UserController@list_users')->name('listar_usuarios');
@@ -59,6 +59,7 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'web', 'prefix' => 'admin'
    Route::post('transfer', 'TransferController@create_transfer');
 
    Route::post('bank/search', 'BankController@view');
+   Route::get('list_banks', 'BankController@list_banks')->name('listar_bancos');
 });
 
 //List of routes for Axios
