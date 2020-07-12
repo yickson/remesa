@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Functions\Utilities;
 use App\Order;
+use App\Rate;
 use App\Transformers\OrderTransformer;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -42,16 +43,17 @@ class DemandController extends Controller
             return response()->json($validate->errors(), 422);
         }
 
+        $rate = Rate::latest()->first();
         $order = Order::create([
             'locator' => Utilities::generateLocator(),
             'amount' => $request->amount,
             'status' => Order::STARTING,
             'account_id' => $request->account,
-            'user_id' => $userId
+            'user_id' => $userId,
+            'rate' => $rate->value
         ]);
 
         $orderCreated = Order::find($order->id);
-
         $data = [
             'response' => true,
             'message' => 'Solicitud creada correctamente',

@@ -93,6 +93,7 @@
                 fields: [
                     { key: 'localizador', label: 'Localizador'},
                     { key: 'monto', label: 'Monto'},
+                    { key: 'tasa', label: 'Tasa'},
                     { key: 'banco', label: 'Banco', sortable: true},
                     { key: 'fecha', label: 'Fecha', sortable: true},
                     { key: 'cedula', label: 'Cedula'},

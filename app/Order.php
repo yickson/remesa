@@ -29,6 +29,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereUserId($value)
  * @mixin \Eloquent
+ * @property string $rate
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Order whereRate($value)
  */
 class Order extends Model
 {
@@ -43,7 +45,8 @@ class Order extends Model
       'amount',
       'status',
       'account_id',
-      'user_id'
+      'user_id',
+      'rate'
     ];
 
     public function user()

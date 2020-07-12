@@ -17,7 +17,7 @@ class OrderController extends Controller
 
     public function list_orders()
     {
-        $orders = Order::with('account', 'user')->get();
+        $orders = Order::with(['account.bank', 'user'])->where('status', '<>', Order::CANCELLED)->get();
         $orders = Fractal::create()->collection($orders)->transformWith(new OrderTransformer())->toArray();
         return response()->json($orders);
     }
@@ -29,6 +29,18 @@ class OrderController extends Controller
             $order->status = Order::VALIDATED;
             $order->save();
             return response()->json(['message' => 'Orden validada']);
+        } else {
+            return response()->json(['error' => 'No existe esta orden']);
+        }
+    }
+
+    public function delete_order(int $id)
+    {
+        $order = Order::find($id);
+        if($order) {
+            $order->status = Order::CANCELLED;
+            $order->save();
+            return response()->json(['message' => 'Orden eliminada']);
         } else {
             return response()->json(['error' => 'No existe esta orden']);
         }

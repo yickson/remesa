@@ -18,6 +18,7 @@ class OrderTransformer extends TransformerAbstract
             'fecha' => $order->created_at->format('d-m-Y'),
             'cedula' => $order->account->identification,
             'nombre' => $order->account->name,
+            'tasa' => $order->rate,
             'cuenta' => $order->account->number,
             'estatus' => $order->status
         ];

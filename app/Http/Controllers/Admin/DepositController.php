@@ -38,7 +38,7 @@ class DepositController extends Controller
         if($deposit) {
             $order = Order::find($request->order);
             if ($order) {
-                $order->status = 'Finalizada';
+                $order->status = Order::FINISHED;
                 $order->save();
             } else {
                 return response()->json(['error' => 'Error no existe la orden']);

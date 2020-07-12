@@ -23,7 +23,11 @@
                                 <b-button size="sm" @click="info(item.item)" v-b-modal.modal-1 class="mr-1" variant="primary">Transferir</b-button>
                             </template>
                             <template v-if="item.item.estatus === 'Procesando'">
-                                <b-button size="sm" variant="success" @click="validateOrder(item.item.id)"><i class="fa fa-check" aria-hidden="true"></i></b-button>
+                                <b-button v-b-tooltip.hover title="Validar orden" size="sm" variant="success" @click="validateOrder(item.item.id)"><i class="fa fa-check" aria-hidden="true"></i></b-button>
+                                <b-button v-b-tooltip.hover title="Eliminar orden" size="sm" variant="danger" @click="deleteOrder(item.item.id)"><i class="fa fa-times" aria-hidden="true"></i></b-button>
+                            </template>
+                            <template v-if="item.item.estatus === 'Iniciando'">
+                                <b-button v-b-tooltip.hover title="Eliminar orden" size="sm" variant="danger" @click="deleteOrder(item.item.id)"><i class="fa fa-times" aria-hidden="true"></i></b-button>
                             </template>
                         </template>
                     </b-table>
@@ -48,6 +52,7 @@
                 <b-list-group-item>Nombre: {{ item.nombre }}</b-list-group-item>
                 <b-list-group-item>Cuenta: {{ item.cuenta }}</b-list-group-item>
                 <b-list-group-item>Estatus: {{ item.estatus }}</b-list-group-item>
+                <b-list-group-item>Monto a transferir: {{ item.monto * item.tasa }}</b-list-group-item>
             </b-list-group>
             <b-form @submit.stop.prevent="makeDeposit" v-if="show">
                 <b-form-group
@@ -97,6 +102,7 @@
                 fields: [
                     { key: 'localizador', label: 'Localizador'},
                     { key: 'monto', label: 'Monto'},
+                    { key: 'tasa', label: 'Tasa'},
                     { key: 'banco', label: 'Banco', sortable: true},
                     { key: 'fecha', label: 'Fecha', sortable: true},
                     { key: 'cedula', label: 'Cedula'},
@@ -116,7 +122,7 @@
         },
         methods: {
             getOrders() {
-                axios.get('list_demands')
+                axios.get('list_orders')
                     .then(response => {
                         this.items = response.data.data;
                     })
@@ -198,6 +204,43 @@
                         console.log(err)
                     })
             },
+            deleteOrder(id) {
+                this.$bvModal.msgBoxConfirm('Una vez hecho esto, es irreversible', {
+                    title: '¿Estás seguro de eliminar esta orden?',
+                    size: 'md',
+                    buttonSize: 'md',
+                    okVariant: 'danger',
+                    okTitle: 'Si',
+                    cancelTitle: 'No',
+                    footerClass: 'p-2',
+                    hideHeaderClose: false,
+                    centered: true
+                })
+                    .then(value => {
+                        if(value) {
+                            axios.get(`delete/${id}`)
+                                .then(response => {
+                                    if(response.data.message) {
+                                        this.$notify({
+                                            group: 'orders',
+                                            title: 'Orden modificada',
+                                            text: '¡Ha sido eliminada exitosamente!'
+                                        });
+                                        this.getOrders();
+                                    } else {
+                                        this.$swal(
+                                            'Error',
+                                            'Orden de cambio no existe',
+                                            'error'
+                                        )
+                                    }
+                                })
+                        }
+                    })
+                    .catch(err => {
+                        console.log(err)
+                    })
+            }
         },
         computed: {
             rows() {
