@@ -22,7 +22,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/contact', 'ContactController@contact')->name('contact');
 Route::post('/contact', 'ContactController@send_contact');
 
-Route::group(['namespace' => 'Admin', 'middleware' => 'web', 'prefix' => 'admin', 'as' => 'admin.'], function(){
+Route::group(['namespace' => 'Admin', 'middleware' => 'auth', 'prefix' => 'admin', 'as' => 'admin.'], function(){
    Route::group(['middleware' => 'admin'], function(){
       Route::get('orders', 'OrderController@index')->name('ordenes');
       Route::get('list_orders', 'OrderController@list_orders')->name('listar_ordenes');

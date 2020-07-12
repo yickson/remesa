@@ -9,7 +9,7 @@ class RateController extends Controller
 {
     public function show()
     {
-        $rate = Rate::orderBy('created_at', 'DESC')->first();
+        $rate = Rate::latest()->first();
         return response()->json($rate);
     }
 }
