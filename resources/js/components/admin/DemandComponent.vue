@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-        <div class="col-6">
+        <div class="col-xs-12 col-sm-6 col-md-6">
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Solicitar remesa</h3>
