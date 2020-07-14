@@ -25,10 +25,10 @@ import es from 'vee-validate/dist/locale/es';
 
 import VueSweetalert2 from 'vue-sweetalert2';
 import {ClientTable} from 'vue-tables-2';
-import Pagination from 'vue-pagination-2';
 import RateComponent from "./components/RateComponent";
 import RateNowComponent from "./components/RateNowComponent";
 import ContactComponent from "./components/ContactComponent";
+import NotificationComponent from "./components/NotificationComponent";
 //Import Admin
 import BankAccountComponent from "./components/admin/BankAccountComponent";
 import BankComponent from "./components/admin/BankComponent";
@@ -42,6 +42,7 @@ import ErrorsValidateComponent from "./components/microComponents/ErrorsValidate
 
 Vue.component('errors-validate-component', ErrorsValidateComponent)
 Vue.component('rate-component', RateComponent);
+Vue.component('notification-component', NotificationComponent);
 Vue.component('rate-now-component', RateNowComponent);
 Vue.component('contact-component', ContactComponent);
 //Component Administrator
@@ -55,7 +56,6 @@ Vue.component('orders-component', OrdersComponent);
 
 
 Vue.use(BootstrapVue);
-//Vue.component('pagination', Pagination);
 Vue.use(ClientTable);
 Vue.use(VeeValidate, {fieldsBagName: 'formFields'});
 Validator.localize("es", es);
