@@ -47,6 +47,15 @@
                 <b-list-group-item>Cuenta: {{ item.cuenta }}</b-list-group-item>
                 <b-list-group-item>Estatus: {{ item.estatus }}</b-list-group-item>
             </b-list-group>
+            <b-list-group>
+                <b-list-group-item>Datos para transferencia</b-list-group-item>
+                <b-list-group-item>Banco de Chile</b-list-group-item>
+                <b-list-group-item>Cuenta corriente</b-list-group-item>
+                <b-list-group-item>8317118</b-list-group-item>
+                <b-list-group-item>Yickson Ramírez</b-list-group-item>
+                <b-list-group-item>25.101.505-8</b-list-group-item>
+                <b-list-group-item>Si tu banco no genera un número de referencia, colocar el rut de la cuenta proveniente.</b-list-group-item>
+            </b-list-group>
             <b-form @submit.stop.prevent="makeDeposit" v-if="show">
                 <b-form-group
                         id="input-group-1"
