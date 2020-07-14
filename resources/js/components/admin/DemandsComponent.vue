@@ -47,6 +47,7 @@
                 <b-list-group-item>Cuenta: {{ item.cuenta }}</b-list-group-item>
                 <b-list-group-item>Estatus: {{ item.estatus }}</b-list-group-item>
             </b-list-group>
+            <hr>
             <b-list-group>
                 <b-list-group-item>Datos para transferencia</b-list-group-item>
                 <b-list-group-item>Banco de Chile</b-list-group-item>
