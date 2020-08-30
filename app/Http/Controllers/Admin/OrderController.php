@@ -17,7 +17,7 @@ class OrderController extends Controller
 
     public function list_orders()
     {
-        $orders = Order::with(['account.bank', 'user'])->where('status', '<>', Order::CANCELLED)->get();
+        $orders = Order::with(['account.bank', 'user'])->where('status', '<>', Order::CANCELLED)->orderBy('id', 'desc')->get();
         $orders = Fractal::create()->collection($orders)->transformWith(new OrderTransformer())->toArray();
         return response()->json($orders);
     }
