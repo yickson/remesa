@@ -32,6 +32,7 @@ class OrderCreatedMail extends Mailable implements ShouldQueue
     {
         return $this
                 ->from('no-responder@tranfex.cl')
+                ->cc('estefanidrj@gmail.com', 'Estefani Rodriguez')
                 ->cc('reinier.ramirez72@gmail.com', 'Reinier Ramírez')
                 ->subject('Orden creada')
                 ->view('emails.ordercreated');
